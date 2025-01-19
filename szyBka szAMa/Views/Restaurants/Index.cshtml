@@ -1,0 +1,31 @@
+﻿@model IEnumerable<szyBka_szAMa.Models.Restaurant>
+
+@{
+    ViewData["Title"] = "Lista Restauracji";
+}
+
+<h2>Lista Restauracji</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nazwa</th>
+        <th>Adres</th>
+        <th>Akcja</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var restaurant in Model)
+    {
+        <tr>
+            <td>@restaurant.Name</td>
+            <td>@restaurant.Address.Street, @restaurant.Address.City</td>
+            <td>
+                <a class="btn btn-info" href="@Url.Action("Menu", "Restaurants", new { id = restaurant.Id })">
+                    Wyświetl Menu
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

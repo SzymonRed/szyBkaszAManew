@@ -1,0 +1,39 @@
+﻿@model List<szyBka_szAMa.Models.WorkHour>
+@{
+ViewBag.Title = "Add Work Hours";
+}
+
+<h2>Add Work Hours for @ViewBag.RestaurantName</h2>
+
+<form asp-action="AddWorkHours" method="post">
+    <input type="hidden" name="restaurantId" value="@ViewBag.RestaurantId" />
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Day of the Week</th>
+            <th>Open Hour</th>
+            <th>Close Hour</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+        <tr>
+            <td>
+                <input type="hidden" asp-for="@Model[i].DayOfWeek" />
+                @Model[i].DayOfWeek
+            </td>
+            <td>
+                <input asp-for="@Model[i].OpenHour" type="time" class="form-control" />
+            </td>
+            <td>
+                <input asp-for="@Model[i].CloseHour" type="time" class="form-control" />
+            </td>
+        </tr>
+        }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Save Work Hours</button>
+</form>

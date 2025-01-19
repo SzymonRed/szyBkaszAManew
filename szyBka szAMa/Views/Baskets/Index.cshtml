@@ -1,0 +1,62 @@
+﻿@model IEnumerable<IGrouping<int, szyBka_szAMa.Models.Dish>>
+
+@{
+    ViewData["Title"] = "Twój Koszyk";
+}
+
+<h2>Twój Koszyk</h2>
+
+@if (!Model.Any())
+{
+    <p>Twój koszyk jest pusty.</p>
+}
+else
+{
+    @foreach (var restaurantGroup in Model)
+    {
+        var restaurant = restaurantGroup.FirstOrDefault()?.Restaurant;
+
+        // Sprawdzenie, czy restauracja istnieje
+        if (restaurant != null)
+        {
+            <h3>@restaurant.Name</h3>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Opis</th>
+                    <th>Cena</th>
+                    <th>Akcje</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var dish in restaurantGroup)
+                {
+                    <tr>
+                        <td>@dish.Name</td>
+                        <td>@dish.Description</td>
+                        <td>@dish.Price.ToString("C")</td>
+                        <td>
+                            <!-- Formularz do usunięcia dania z koszyka -->
+                            <form asp-action="RemoveFromBasket" method="post" style="display:inline;">
+                                <input type="hidden" name="dishId" value="@dish.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+            <div class="text-right">
+                <!-- Przycisk do przejścia do podsumowania dla danej restauracji -->
+                <a class="btn btn-primary" href="@Url.Action("Checkout", "Baskets", new { restaurantId = restaurant.Id })">Przejdź do podsumowania</a>
+            </div>
+        }
+        else
+        {
+            <p>Nie znaleziono restauracji dla tych dań.</p>
+        }
+    }
+}

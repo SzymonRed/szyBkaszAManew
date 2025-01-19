@@ -1,0 +1,77 @@
+﻿@model szyBka_szAMa.Models.Restaurant
+
+<div class="container">
+    <div class="row">
+        <!-- Główna część strony (szczegóły restauracji) -->
+        <div class="col-md-9">
+            <h1>Details for @Model.Name</h1>
+
+            <h2>Address</h2>
+            <p>
+                @Model.Address.Street, @Model.Address.Building
+                @if (!string.IsNullOrEmpty(Model.Address.Apartment))
+                {
+                <span>Apartment: @Model.Address.Apartment</span>
+                }
+                <br />
+                @Model.Address.ZipCode @Model.Address.City
+                <br />
+                Email: @Model.Address.Email
+                <br />
+                @if (!string.IsNullOrEmpty(Model.Address.Phone))
+                {
+                <span>Phone: @Model.Address.Phone</span>
+                }
+                <a asp-action="Edit" asp-controller="Addresses" asp-route-id="@Model.Address.Id" class="btn btn-warning">Edit Address</a>
+            </p>
+
+            <h2>Reviews</h2>
+            <ul>
+                @foreach (var review in Model.Reviews)
+                {
+                <li>Rating: @review.Rating - @review.Comment</li>
+                }
+            </ul>
+
+            <h2>Work Hours</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Opening Time</th>
+                    <th>Closing Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var hour in Model.WorkHours)
+                {
+                    <tr>
+                        <td>@hour.DayOfWeek</td>
+                        <td>@hour.OpenHour</td>
+                        <td>@hour.CloseHour</td>
+                        <td>
+                            <a asp-action="Edit" asp-controller="WorkHours" asp-route-id="@hour.Id" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+            <a asp-action="Orders" asp-controller="Restaurants" asp-route-restaurantId="@Model.Id" class="btn btn-primary">View Orders</a>
+
+
+            <!-- Przycisk przekierowujący do widoku pracowników -->
+            <a asp-action="Employees" asp-controller="Restaurants" asp-route-restaurantId="@Model.Id" class="btn btn-primary">View Employees</a>
+
+            <!-- Przycisk dodawania pracownika -->
+            <a asp-action="CreateNewEmployee" asp-controller="Users" asp-route-restaurantId="@Model.Id" class="btn btn-success">Add Employee</a>
+        </div>
+
+        <!-- Panel boczny -->
+        <div class="col-md-3">
+            <div class="sidebar">
+                <!-- Przycisk przejścia do menu -->
+                <a asp-action="Menu" asp-controller="Restaurants" asp-route-id="@Model.Id" class="btn btn-primary btn-block">Go to Menu</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.sidebar {
+  position: fixed; /* Umożliwia przypięcie panelu do boku */
+  top: 20px; /* Odstęp od góry */
+  right: 20px; /* Odstęp od prawej strony */
+  width: 200px; /* Szerokość panelu bocznego */
+  padding: 15px;
+  background-color: #f8f9fa; /* Tło panelu bocznego */
+  border: 1px solid #ddd; /* Obramowanie */
+  border-radius: 8px; /* Zaokrąglenie rogów */
+}
+
+.sidebar .btn {
+  width: 100%; /* Przyciski w bocznym panelu będą rozciągały się na całą szerokość */
+  margin-bottom: 10px; /* Odstęp między przyciskami */
+}

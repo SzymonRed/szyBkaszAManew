@@ -1,0 +1,51 @@
+﻿@model szyBka_szAMa.Models.Order
+
+@{
+    ViewData["Title"] = "Place Your Order";
+}
+
+<h2>Place Your Order</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">@TempData["Message"]</div>
+}
+
+<form method="post">
+    <h3>Your Basket:</h3>
+    <ul>
+        @foreach (var dish in Model.Dishes)
+        {
+            <li>@dish.Name - @dish.Price zł</li>
+        }
+    </ul>
+
+    <p>Total: @Model.Dishes.Sum(d => d.Price) zł</p>
+
+    <!-- Delivery Method Selection -->
+    <div class="form-group">
+        <label for="DeliveryMethod">Delivery Method</label>
+        <select asp-for="DeliveryMethod" class="form-control">
+            @foreach (var method in Enum.GetValues(typeof(szyBka_szAMa.Models.DeliveryMethod)).Cast<szyBka_szAMa.Models.DeliveryMethod>())
+            {
+                <option value="@method">@method</option>
+            }
+        </select>
+    </div>
+
+    <!-- Payment Method Selection -->
+    <div class="form-group">
+        <label for="PaymentMethod">Payment Method</label>
+        <select asp-for="PaymentMethod" class="form-control">
+            @foreach (var method in Enum.GetValues(typeof(szyBka_szAMa.Models.PaymentMethod)).Cast<szyBka_szAMa.Models.PaymentMethod>())
+            {
+                <option value="@method">@method</option>
+            }
+        </select>
+    </div>
+
+    <input type="hidden" asp-for="RestaurantId" />
+    <input type="hidden" asp-for="UserId" />
+
+    <button type="submit" class="btn btn-primary">Place Order</button>
+</form>

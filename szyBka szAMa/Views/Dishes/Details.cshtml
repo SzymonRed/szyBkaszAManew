@@ -1,0 +1,46 @@
+﻿@model szyBka_szAMa.Models.Dish
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <h1>Details for @Model.Name</h1>
+
+            <div>
+                <strong>Description:</strong>
+                <p>@Model.Description</p>
+            </div>
+
+            <div>
+                <strong>Price:</strong>
+                <p>@Model.Price.ToString("C")</p>
+            </div>
+
+            <div>
+                <strong>Category:</strong>
+                <p>@Model.DishCategory</p>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Photo))
+            {
+            <div>
+                <strong>Photo:</strong>
+                <img src="@Model.Photo" alt="@Model.Name" class="img-fluid" />
+            </div>
+            }
+
+            <div>
+                <strong>Restaurant:</strong>
+                <p>@Model.Restaurant.Name</p>
+            </div>
+
+        @if (ViewBag.Role == "RestaurantAdministrator")
+            {
+
+                <!-- Przycisk edycji -->
+                <a asp-action="EditDish" asp-controller="Dishes" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+            }
+            <!-- Przycisk powrotu do menu restauracji -->
+            <a asp-action="Menu" asp-controller="Restaurants" asp-route-id="@Model.RestaurantId" class="btn btn-secondary">Back to Menu</a>
+        </div>
+    </div>
+</div>

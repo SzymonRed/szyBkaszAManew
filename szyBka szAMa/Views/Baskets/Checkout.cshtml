@@ -1,0 +1,30 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Basket Checkout";
+}
+
+<h2>Your Basket</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">@TempData["Message"]</div>
+}
+
+@if (Model.Dishes.Any())
+{
+    <ul>
+        @foreach (var dish in Model.Dishes)
+        {
+            <li>@dish.Name - @dish.Price zł</li>
+        }
+    </ul>
+
+    <p>Total: @Model.Dishes.Sum(d => d.Price) zł</p>
+
+    <a asp-action="Create" asp-controller="Orders" class="btn btn-primary">Proceed to Order</a>
+}
+else
+{
+    <p>Your basket is empty.</p>
+}

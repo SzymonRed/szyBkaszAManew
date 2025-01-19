@@ -1,0 +1,43 @@
+﻿@model IEnumerable<szyBka_szAMa.Models.Order>
+@{
+    ViewData["Title"] = "Restaurant Orders";
+}
+
+<div class="container">
+    <h1>Orders</h1>
+
+    <!-- Tabela z zamówieniami -->
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Payment Status</th>
+                <th>Delivery Time</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.TimeOrdered.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@order.Status</td>
+                    <td>@(order.PaymentComplete ? "Paid" : "Pending")</td>
+                    <td>@(order.TimeDelivered?.ToString("yyyy-MM-dd HH:mm") ?? "Not Set")</td>
+                    <td>
+                        <a asp-action="Details" asp-controller="Orders" asp-route-id="@order.Id" class="btn btn-info">View</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No orders found for this restaurant.</p>
+    }
+    <a asp-action="Details" asp-controller="Restaurants" asp-route-id="@ViewBag.RestaurantId" class="btn btn-secondary">Back to Restaurant</a>
+</div>

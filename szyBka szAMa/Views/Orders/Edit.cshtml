@@ -1,0 +1,90 @@
+﻿@model szyBka_szAMa.Models.Order
+
+@{
+    ViewData["Title"] = "Edit Order";
+}
+
+<h1>Edit Order #@Model.Id</h1>
+
+<h4>Order Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!-- Hidden fields for UserId, RestaurantId, and OrderId -->
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="RestaurantId" />
+
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control">
+                    @foreach (var status in ViewBag.OrderStatuses)
+                    {
+                        <option value="@status" selected="@status.Equals(Model.Status)">@status</option>
+                    }
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DeliveryMethod" class="control-label"></label>
+                <select asp-for="DeliveryMethod" class="form-control">
+                    @foreach (var deliveryMethod in ViewBag.DeliveryMethods)
+                    {
+                        <option value="@deliveryMethod" selected="@deliveryMethod.Equals(Model.DeliveryMethod)">@deliveryMethod</option>
+                    }
+                </select>
+                <span asp-validation-for="DeliveryMethod" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PaymentMethod" class="control-label"></label>
+                <select asp-for="PaymentMethod" class="form-control">
+                    @foreach (var paymentMethod in ViewBag.PaymentMethods)
+                    {
+                        <option value="@paymentMethod" selected="@paymentMethod.Equals(Model.PaymentMethod)">@paymentMethod</option>
+                    }
+                </select>
+                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PaymentComplete" class="control-label"></label>
+                <input asp-for="PaymentComplete" type="checkbox" class="form-check-input" />
+                <span asp-validation-for="PaymentComplete" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TimeDelivered" class="control-label"></label>
+                <input asp-for="TimeDelivered" class="form-control" type="datetime-local" />
+                <span asp-validation-for="TimeDelivered" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TimePrepared" class="control-label"></label>
+                <input asp-for="TimePrepared" class="form-control" type="datetime-local" />
+                <span asp-validation-for="TimePrepared" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TimeOrdered" class="control-label"></label>
+                <input asp-for="TimeOrdered" class="form-control" type="datetime-local" />
+                <span asp-validation-for="TimeOrdered" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to Orders</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

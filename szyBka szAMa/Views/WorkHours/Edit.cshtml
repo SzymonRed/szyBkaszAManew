@@ -1,0 +1,34 @@
+﻿@using DayOfWeek = System.DayOfWeek
+@model szyBka_szAMa.Models.WorkHour
+
+@{
+    ViewData["Title"] = "Edit Work Hour";
+}
+
+<h1>Edit Work Hour</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="RestaurantId" />
+
+    <div class="form-group">
+        <label asp-for="DayOfWeek"></label>
+        <select asp-for="DayOfWeek" class="form-control" asp-items="Html.GetEnumSelectList<DayOfWeek>()"></select>
+        <span asp-validation-for="DayOfWeek" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OpenHour"></label>
+        <input asp-for="OpenHour" class="form-control" type="time" />
+        <span asp-validation-for="OpenHour" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CloseHour"></label>
+        <input asp-for="CloseHour" class="form-control" type="time" />
+        <span asp-validation-for="CloseHour" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Details" asp-controller="Restaurants" asp-route-id="@Model.RestaurantId" class="btn btn-secondary">Cancel</a>
+</form>

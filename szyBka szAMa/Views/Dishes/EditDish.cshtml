@@ -1,0 +1,70 @@
+﻿@model szyBka_szAMa.Models.Dish
+@{
+ViewBag.Title = "Edit Dish";
+}
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+<h1>Edit Dish</h1>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="RestaurantId" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" type="number" step="0.01" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    @{
+    var categories = ViewBag.Categories as IEnumerable<SelectListItem>;
+    }
+
+    <div class="form-group">
+        <label for="DishCategory">Category</label>
+        <select class="form-control" id="DishCategory" name="DishCategory" required>
+            @if (categories != null)
+            {
+            foreach (var category in categories)
+            {
+            <option value="@category.Value">@category.Text</option>
+            }
+            }
+            else
+            {
+            <option>No category available</option>
+            }
+        </select>
+    </div>
+
+    <!-- Photo upload -->
+    <div class="form-group">
+        <label asp-for="Photo">Current Photo</label>
+        @if (!string.IsNullOrEmpty(Model.Photo))
+        {
+        <div class="mt-2">
+            <strong>Current Photo:</strong>
+            <img src="@Model.Photo" alt="@Model.Name" class="img-fluid" style="max-height: 200px;" />
+            <p class="mt-2"><strong>File Name:</strong> @System.IO.Path.GetFileName(Model.Photo)</p>
+        </div>
+        }
+        <label for="Photo">Upload New Photo (Optional)</label>
+        <input type="file" class="form-control" id="Photo" name="Photo" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-action="Details" asp-controller="Dishes" asp-route-id="@Model.Id" class="btn btn-secondary mt-3">Back to Details</a>
+</form>

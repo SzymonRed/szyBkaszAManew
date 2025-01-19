@@ -1,0 +1,26 @@
+﻿@{
+ViewData["Title"] = "Logowanie restauracji";
+}
+
+<h2>Logowanie restauracji</h2>
+<form asp-action="LoginRestaurant" method="post">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email restauracji</label>
+        <input type="email" name="email" class="form-control" id="email" required />
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Hasło administratora</label>
+        <input type="password" name="password" class="form-control" id="password" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Zaloguj</button>
+</form>
+
+@if (ViewData["LoginError"] != null)
+{
+<div class="text-danger mt-2">
+    @ViewData["LoginError"]
+</div>
+}
+
+<hr />
+<p>Nie masz konta? <a asp-action="RegisterRestaurantAdministrator" asp-controller="Restaurants">Zarejestruj się jako restauracja</a>.</p>
