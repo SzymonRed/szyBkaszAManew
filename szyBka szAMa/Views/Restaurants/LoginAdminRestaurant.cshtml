@@ -3,24 +3,25 @@
 }
 
 <h2>Logowanie Administratora restauracji</h2>
-<form asp-action="LoginAdminRestaurant" method="post">
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="email" required />
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Hasło</label>
-        <input type="password" name="password" class="form-control" id="password" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Zaloguj</button>
-</form>
-
+<div class="container" style="max-width: 400px;">
+    <form asp-action="LoginAdminRestaurant" method="post">
+        <div class="form-floating mt-3">
+            <input type="email" name="email" class="form-control" placeholder="Email" id="email" required/>
+            <label>Adres email</label>
+        </div>
+        <div class="form-floating mt-3">
+            <input name="password" class="form-control" type="password" placeholder="Password" id="password" required/>
+            <label>Hasło</label>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-primary w-100">Zaloguj</button>
+    </form>
+    <br/>
+    <p>Nie masz konta? <a asp-action="RegisterRestaurantAdministrator" asp-controller="Restaurants">Zarejestruj się tutaj!</a></p>
+</div>
 @if (!ViewData.ModelState.IsValid)
 {
     <div class="text-danger mt-2">
         Nieprawidłowy email lub hasło.
     </div>
 }
-
-<hr />
-<p>Nie masz konta? <a asp-action="RegisterRestaurantAdministrator" asp-controller="Restaurants">Zarejestruj się jako restauracja</a>.</p>

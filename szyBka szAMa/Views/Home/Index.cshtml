@@ -1,15 +1,51 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <div class="row text-center">
+        <!-- Kafelek Restauracje -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg border-0 fixed-tile">
+                <a href="@Url.Action("Index", "Restaurants")" class="card-link">
+                    <div class="card-body">
+                        <h2 class="card-title">Restauracje</h2>
+                        <img src="path_to_your_image.png" alt="Dania" class="card-img-top mb-3" />
+                        <p class="card-text">Szukaj restauracji w pobliżu!</p>
+                    </div>
+                </a>
+            </div>
+        </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+
+        <!-- Kafelek Dania -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg border-0 fixed-tile">
+                <a href="@Url.Action("Index", "Restaurants")" class="card-link">
+                    <div class="card-body">
+                        <h2 class="card-title">Dania</h2>
+                        <img src="path_to_your_image.png" alt="Dania" class="card-img-top mb-3" />
+                        <p class="card-text">Zamów swoje ulubione potrawy już teraz!</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div></div>
     @if (ViewBag.UserRole == "Client")
     {
-        <a class="btn btn-primary" href="@Url.Action("Index", "Restaurants")">Wyświetl Restauracje</a>
-        <a class="btn btn-primary" href="@Url.Action("Index", "Baskets")">Twój Koszyk</a>
-        <a class="btn btn-primary" href="@Url.Action("MyOrders", "Orders")">Moje Zamówienia</a>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Baskets")">Koszyk</a>
+        <a class="btn btn-primary" href="@Url.Action("MyOrders", "Orders")">Zamówienia</a>
 
     }
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<style>
+    .fixed-tile {
+        width: 400px;
+        height: 400px;
+    }
+
+    .card-body {
+        text-align: center;
+    }
+    
+</style>
