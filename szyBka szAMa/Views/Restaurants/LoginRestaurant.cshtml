@@ -2,9 +2,10 @@
 ViewData["Title"] = "Logowanie restauracji";
 }
 
-<h2>Logowanie restauracji</h2>
-<div class="container" style="max-width: 400px;">
-    <form asp-action="LoginRestaurant" method="post">
+
+<div class="container" style="max-width: 400px; background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px;">
+    <h2 class="text-center">Logowanie restauracji</h2>
+    <form asp-action="LoginRestaurant" method="post" class="mt-2">
         <div class="form-floating mt-3">
             <input type="email" name="email" class="form-control" placeholder="Email" id="email" required/>
             <label>Adres email</label>

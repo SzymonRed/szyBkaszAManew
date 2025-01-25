@@ -4,10 +4,11 @@
 ViewData["Title"] = "Register Restaurant Admin";
 }
 
-<h2>Register Restaurant Admin</h2>
+
 <div class="d-flex justify-content-center align-items-center">
-    <div class="container" style="max-width: 600px;">
-        <form asp-action="RegisterRestaurantAdministrator" method="post">
+    <div class="container" style="max-width: 600px; background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px;">
+        <h2 class="text-center">Register Restaurant Admin</h2>
+        <form asp-action="RegisterRestaurantAdministrator" method="post" class="mt-2">
             <h4>Dane osobowe</h4>
             <div class="row">
                 <div class="form-floating col-md-6">

@@ -4,10 +4,11 @@
     ViewData["Title"] = "Register User";
 }
 
-<h2>Rejestracja</h2>
+
 <div class="d-flex justify-content-center align-items-center">
-    <div class="container" style="max-width: 600px;">
-        <form asp-action="Create" method="post" id="registerForm">
+    <div class="container" style="max-width: 600px; background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px;">
+        <h2 class="text-center">Rejestracja</h2>
+        <form asp-action="Create" method="post" id="registerForm" class="mt-2">
             <h4>Dane osobowe</h4>
             <div class="row">
                 <div class="form-floating col-md-6">
