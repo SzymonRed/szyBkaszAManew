@@ -16,7 +16,7 @@
                                 <a href="@Url.Action("Details", "Dishes", new { id = dish.Id })" class="card-link">
                                     <div class="card-body">
                                         <h5 class="card-title">@dish.Name</h5>
-                                        <img src="path_to_image.png" alt="@dish.Name" class="card-img mb-3" />
+                                        <img src="@dish.Photo" alt="@dish.Name" class="card-img mb-3" />
                                         <p class="card-text">@dish.Description</p>
                                     </div>
                                 </a>

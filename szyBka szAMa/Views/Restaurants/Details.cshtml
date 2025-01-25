@@ -2,76 +2,86 @@
 
 <div class="container">
     <div class="row">
-        <!-- Główna część strony (szczegóły restauracji) -->
-        <div class="col-md-9">
-            <h1>Details for @Model.Name</h1>
-
-            <h2>Address</h2>
-            <p>
-                @Model.Address.Street, @Model.Address.Building
-                @if (!string.IsNullOrEmpty(Model.Address.Apartment))
-                {
-                <span>Apartment: @Model.Address.Apartment</span>
-                }
-                <br />
-                @Model.Address.ZipCode @Model.Address.City
-                <br />
-                Email: @Model.Address.Email
-                <br />
-                @if (!string.IsNullOrEmpty(Model.Address.Phone))
-                {
-                <span>Phone: @Model.Address.Phone</span>
-                }
-                <a asp-action="Edit" asp-controller="Addresses" asp-route-id="@Model.Address.Id" class="btn btn-warning">Edit Address</a>
-            </p>
-
-            <h2>Reviews</h2>
-            <ul>
-                @foreach (var review in Model.Reviews)
-                {
-                <li>Rating: @review.Rating - @review.Comment</li>
-                }
-            </ul>
-
-            <h2>Work Hours</h2>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Day</th>
-                    <th>Opening Time</th>
-                    <th>Closing Time</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach (var hour in Model.WorkHours)
-                {
-                    <tr>
-                        <td>@hour.DayOfWeek</td>
-                        <td>@hour.OpenHour</td>
-                        <td>@hour.CloseHour</td>
-                        <td>
-                            <a asp-action="Edit" asp-controller="WorkHours" asp-route-id="@hour.Id" class="btn btn-warning">Edit</a>
-                        </td>
-                    </tr>
-                }
-                </tbody>
-            </table>
-            <a asp-action="Orders" asp-controller="Restaurants" asp-route-restaurantId="@Model.Id" class="btn btn-primary">View Orders</a>
-
-
-            <!-- Przycisk przekierowujący do widoku pracowników -->
-            <a asp-action="Employees" asp-controller="Restaurants" asp-route-restaurantId="@Model.Id" class="btn btn-primary">View Employees</a>
-
-            <!-- Przycisk dodawania pracownika -->
-            <a asp-action="CreateNewEmployee" asp-controller="Users" asp-route-restaurantId="@Model.Id" class="btn btn-success">Add Employee</a>
+        <!-- Miejsce na obrazek restauracji (po lewej stronie) -->
+        <div class="col-md-4">
+                <div class="mb-4">
+                    <img src="#" alt="Restaurant img" class="img-fluid rounded" />
+                </div>
         </div>
 
-        <!-- Panel boczny -->
-        <div class="col-md-3">
-            <div class="sidebar">
-                <!-- Przycisk przejścia do menu -->
+        <!-- Główna część strony (szczegóły restauracji) po prawej stronie -->
+        <div class="col-md-8">
+            <h1>Details for @Model.Name</h1>
+
+            <!-- Sekcja Adresu -->
+            <section class="mb-4">
+                <h2>Dane kontaktowe i adresowe</h2>
+                <p>
+                    Adres
+                    @Model.Address.Street, @Model.Address.Building
+                    @if (!string.IsNullOrEmpty(Model.Address.Apartment))
+                    {
+                        <span> @Model.Address.Apartment</span>
+                    }
+                    <br />
+                    @Model.Address.ZipCode @Model.Address.City
+                    <br />
+                    Adres email: @Model.Address.Email
+                    <br />
+                    @if (!string.IsNullOrEmpty(Model.Address.Phone))
+                    {
+                        <span>Nr. tel.: @Model.Address.Phone</span>
+                    }
+                    <br />
+                    <a asp-action="Edit" asp-controller="Addresses" asp-route-id="@Model.Address.Id" class="btn btn-warning mt-2">Edit Address</a>
+                </p>
+            </section>
+
+            <!-- Sekcja Recenzji -->
+            <section class="mb-4">
+                <h2>Opinie</h2>
+                <ul>
+                    @foreach (var review in Model.Reviews)
+                    {
+                        <li>Ocena: @review.Rating - @review.Comment</li>
+                    }
+                </ul>
+            </section>
+
+            <!-- Sekcja Godzin pracy -->
+            <section class="mb-4">
+                <h2>Godziny otwarcia</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Dzień</th>
+                        <th>Otwarcie</th>
+                        <th>Zamknięcie</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var hour in Model.WorkHours)
+                    {
+                        <tr>
+                            <td>@hour.DayOfWeek</td>
+                            <td>@hour.OpenHour</td>
+                            <td>@hour.CloseHour</td>
+                            <td>
+                                <a asp-action="Edit" asp-controller="WorkHours" asp-route-id="@hour.Id" class="btn btn-warning">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Sekcja przycisków do innych działań -->
+            <section class="mb-4">
+                <a asp-action="Orders" asp-controller="Restaurants" asp-route-restaurantId="@Model.Id" class="btn btn-primary">View Orders</a>
+                <a asp-action="Employees" asp-controller="Restaurants" asp-route-restaurantId="@Model.Id" class="btn btn-primary">View Employees</a>
+                <a asp-action="CreateNewEmployee" asp-controller="Users" asp-route-restaurantId="@Model.Id" class="btn btn-success">Add Employee</a>
                 <a asp-action="Menu" asp-controller="Restaurants" asp-route-id="@Model.Id" class="btn btn-primary btn-block">Go to Menu</a>
-            </div>
+            </section>
         </div>
     </div>
 </div>
