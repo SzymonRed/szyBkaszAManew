@@ -1,93 +1,101 @@
 ﻿@model szyBka_szAMa.Models.User
+<h2>Dodawanie pracownika</h2>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="container" style="max-width: 600px;">
+        <form method="post">
+            <h4>Dane osobowe</h4>
+            <div class="row">
+                <div class="form-floating col-md-6">
+                    <label for="FirstName">Imię</label>
+                    <input type="text" class="form-control" id="FirstName" name="FirstName" required />
+                </div>
+                <div class="form-floating col-md-6">
+                    <label for="LastName">Nazwisko</label>
+                    <input type="text" class="form-control" id="LastName" name="LastName" required />
+                </div>
+            </div>
 
-<div class="container">
-    <h2>Add New Employee</h2>
+            <div class="form-floating mt-3">
+                <label for="UserName">Nazwa użytkownika</label>
+                <input type="text" class="form-control" id="UserName" name="UserName" required />
+            </div>
 
-    <form method="post">
-        <div class="form-group">
-            <label for="FirstName">First Name</label>
-            <input type="text" class="form-control" id="FirstName" name="FirstName" required />
-        </div>
+            <div class="row mt-3">
+                <div class="form-floating col-md-6">
+                    <label for="Password">Hasło</label>
+                    <input type="password" class="form-control" id="Password" name="Password" required />
+                </div>
+                <div class="form-floating col-md-6">
+                    <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword" />
+                    <label for="confirmPassword">Potwierdź hasło</label>
+                    <span id="confirmPasswordError" class="text-danger"></span>
+                </div>
+            </div>
 
-        <div class="form-group">
-            <label for="LastName">Last Name</label>
-            <input type="text" class="form-control" id="LastName" name="LastName" required />
-        </div>
+            <h4 class="mt-4">Dane adresowe</h4>
+            <div class="row">
+                <div class="form-floating col-md-6">
+                    <input name="address.Street" class="form-control" placeholder="Street" />
+                    <label>Ulica</label>
+                    <span asp-validation-for="Address.Street" class="text-danger"></span>
+                </div>
+                <div class="form-floating col-md-3">
+                    <input name="address.Building" class="form-control" placeholder="Building" />
+                    <label>Numer budynku</label>
+                    <span asp-validation-for="Address.Building" class="text-danger"></span>
+                </div>
+                <div class="form-floating col-md-3">
+                    <input name="address.Apartment" class="form-control" placeholder="Apartment" />
+                    <label>Numer mieszkania</label>
+                </div>
+            </div>
 
-        <div class="form-group">
-            <label for="UserName">User Name</label>
-            <input type="text" class="form-control" id="UserName" name="UserName" required />
-        </div>
+            <div class="row mt-3">
+                <div class="form-floating col-md-6">
+                    <input name="address.ZipCode" class="form-control" placeholder="Zip Code" />
+                    <label>Kod pocztowy</label>
+                    <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
+                </div>
+                <div class="form-floating col-md-6">
+                    <input name="address.City" class="form-control" placeholder="City" />
+                    <label>Miasto</label>
+                    <span asp-validation-for="Address.City" class="text-danger"></span>
+                </div>
+            </div>
 
-        <div class="form-group">
-            <label for="Password">Password</label>
-            <input type="password" class="form-control" id="Password" name="Password" required />
-        </div>
+            <div class="form-floating mt-3">
+                <input name="address.Email" class="form-control" placeholder="Email" />
+                <label>Adres email</label>
+                <span asp-validation-for="Address.Email" class="text-danger"></span>
+            </div>
 
-        <h4>Address Information</h4>
-        <div class="form-group">
-            <label>City</label>
-            <input name="address.City" class="form-control" />
-            <span asp-validation-for="Address.City" class="text-danger"></span>
-        </div>
+            <div class="form-floating mt-3">
+                <input name="address.Phone" class="form-control" placeholder="Phone" />
+                <label>Numer telefonu</label>
+            </div>
+            @{
+                var roles = ViewBag.Roles as IEnumerable<SelectListItem>;
+            }
 
-        <div class="form-group">
-            <label>Street</label>
-            <input name="address.Street" class="form-control" />
-            <span asp-validation-for="Address.Street" class="text-danger"></span>
-        </div>
+            <div class="form-group">
+                <label for="Role">Role</label>
+                <select class="form-select" id="Role" name="Role" required>
+                    @if (roles != null)
+                    {
+                        foreach (var role in roles)
+                        {
+                            <option value="@role.Value">@role.Text</option>
+                        }
+                    }
+                    else
+                    {
+                        <option>No roles available</option>
+                    }
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label>Zip Code</label>
-            <input name="address.ZipCode" class="form-control" />
-            <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label>Building</label>
-            <input name="address.Building" class="form-control" />
-            <span asp-validation-for="Address.Building" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label>Apartment</label>
-            <input name="address.Apartment" class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <label>Email</label>
-            <input name="address.Email" class="form-control" />
-            <span asp-validation-for="Address.Email" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label>Phone</label>
-            <input name="address.Phone" class="form-control" />
-        </div>
-
-        @{
-        var roles = ViewBag.Roles as IEnumerable<SelectListItem>;
-        }
-
-        <div class="form-group">
-            <label for="Role">Role</label>
-            <select class="form-control" id="Role" name="Role" required>
-                @if (roles != null)
-                {
-                foreach (var role in roles)
-                {
-                <option value="@role.Value">@role.Text</option>
-                }
-                }
-                else
-                {
-                <option>No roles available</option>
-                }
-            </select>
-        </div>
-        
-        <input type="hidden" name="RestaurantId" value="@Model.RestaurantId" />
-
-        <button type="submit" class="btn btn-success">Save</button>
-    </form>
+            <input type="hidden" name="RestaurantId" value="@Model.RestaurantId" />
+            <button type="submit" class="btn btn-primary mt-4 w-100">Dodaj pracownika</button>
+        </form>
+    </div>
 </div>

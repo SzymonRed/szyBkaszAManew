@@ -6,38 +6,51 @@
 <div class="container">
     <h1>Orders</h1>
 
-    <!-- Tabela z zamówieniami -->
+    <!-- Lista zamówień -->
     @if (Model != null && Model.Any())
     {
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Order Date</th>
-                <th>Status</th>
-                <th>Payment Status</th>
-                <th>Delivery Time</th>
-                <th>Details</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var order in Model)
-            {
-                <tr>
-                    <td>@order.TimeOrdered.ToString("yyyy-MM-dd HH:mm")</td>
-                    <td>@order.Status</td>
-                    <td>@(order.PaymentComplete ? "Paid" : "Pending")</td>
-                    <td>@(order.TimeDelivered?.ToString("yyyy-MM-dd HH:mm") ?? "Not Set")</td>
-                    <td>
-                        <a asp-action="Details" asp-controller="Orders" asp-route-id="@order.Id" class="btn btn-info">View</a>
-                    </td>
-                </tr>
-            }
-            </tbody>
-        </table>
+        @foreach (var order in Model)
+        {
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <!-- Informacje o zamówieniu po lewej stronie -->
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Order #@order.Id</h5>
+                            <p class="card-text"><strong>Order Date:</strong> @order.TimeOrdered.ToString("yyyy-MM-dd HH:mm")</p>
+                            <p class="card-text"><strong>Status:</strong> @order.Status</p>
+                            <p class="card-text"><strong>Payment Status:</strong> @(order.PaymentComplete ? "Paid" : "Pending")</p>
+                            <p class="card-text"><strong>Delivery Time:</strong> @(order.TimeDelivered?.ToString("yyyy-MM-dd HH:mm") ?? "Not Set")</p>
+                        </div>
+                    </div>
+
+                    <!-- Przycisk akcji po prawej stronie -->
+                    <div class="col-md-4 d-flex align-items-center justify-content-end">
+                        <div>
+                            <a asp-action="Details" asp-controller="Orders" asp-route-id="@order.Id" class="btn btn-info mb-2">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
     }
     else
     {
         <p>No orders found for this restaurant.</p>
     }
+
+    <!-- Powrót do szczegółów restauracji -->
     <a asp-action="Details" asp-controller="Restaurants" asp-route-id="@ViewBag.RestaurantId" class="btn btn-secondary">Back to Restaurant</a>
 </div>
+<style>
+    /* Dodatkowy margines między kartami */
+    .card {
+        margin-bottom: 15px;
+    }
+
+    /* Margines dla przycisków */
+    .btn {
+        margin-right: 5px;
+    }
+
+</style>
