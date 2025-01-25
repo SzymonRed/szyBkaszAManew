@@ -3,37 +3,27 @@
 <div class="container">
     <div class="row">
         <!-- Główna część strony - lista dań -->
-        <div class="col-md-9">
+        <div class="col-md-12">
             <h1>Menu for @Model.Name</h1>
 
             @if (Model.Dishes.Any())
             {
-                <ul>
+                <div class="row">
                     @foreach (var dish in Model.Dishes)
                     {
-                        <li>
-                            @dish.Name
-                            <!-- Przycisk szczegóły dla każdego dania -->
-                            <a asp-action="Details" asp-controller="Dishes" asp-route-id="@dish.Id" class="btn btn-info btn-sm">Details</a>
-                            @if (ViewBag.Role == "Client")
-                            {
-                                <!-- Przycisk Dodaj do Koszyka -->
-                                <form method="post" asp-action="AddToBasket" asp-controller="Baskets" style="display:inline;">
-                                    <input type="hidden" name="dishId" value="@dish.Id" />
-                                    <input type="hidden" name="restaurantId" value="@Model.Id" />
-                                    <button type="submit" class="btn btn-primary btn-sm">Dodaj do Koszyka</button>
-                                </form>
-                            }
-                            @if (ViewBag.Role == "RestaurantAdministrator")
-                            {
-                                <!-- Przycisk usuwania dania -->
-                                <form method="post" asp-action="Delete" asp-controller="Dishes" asp-route-id="@dish.Id" onsubmit="return confirm('Are you sure you want to delete this dish?');" style="display:inline;">
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
-                            }
-                        </li>
+                        <div class="col-md-2 mb-4">
+                            <div class="card shadow-lg border-0">
+                                <a href="@Url.Action("Details", "Dishes", new { id = dish.Id })" class="card-link">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@dish.Name</h5>
+                                        <img src="@dish.Photo" alt="@dish.Name" class="card-img mb-3" />
+                                        <p class="card-text">@dish.Description</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     }
-                </ul>
+                </div>
             }
             else
             {
@@ -46,16 +36,27 @@
                 <a asp-action="Create" asp-controller="Dishes" asp-route-restaurantId="@Model.Id" class="btn btn-success">Add New Dish</a>
             }
         </div>
+    </div>
 
-        <!-- Panel boczny -->
-        <div class="col-md-3">
-            <div class="sidebar">
+    <!-- Panel boczny (opcjonalnie) -->
+    <div class="col-md-3">
+        <div class="sidebar">
             @if (ViewBag.Role == "RestaurantAdministrator")
             {
                 <!-- Przycisk powrotu do szczegółów restauracji -->
                 <a asp-action="Details" asp-controller="Restaurants" asp-route-id="@Model.Id" class="btn btn-secondary btn-block">Back to Details</a>
             }
-            </div>
         </div>
     </div>
 </div>
+<style>
+    .card-link {
+        text-decoration: none; /* Usuwa podkreślenie */
+        color: inherit; /* Kolor tekstu odziedziczony po elemencie nadrzędnym */
+    }
+    
+    .card-link:hover {
+        opacity: 0.8; /* Efekt przyciemnienia po najechaniu */
+        text-decoration: none; /* Usuwa podkreślenie przy hover */
+    }
+</style>

@@ -2,25 +2,28 @@
     ViewData["Title"] = "Logowanie Administratora Restauracji";
 }
 
-<h2>Logowanie Użytkownika</h2>
-<form asp-action="Login" method="post">
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="email" required />
+<h2>Logowanie</h2>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="container" style="max-width: 400px;">
+        <form asp-action="Login" method="post">
+            <div class="form-floating mt-3">
+                <input type="email" name="email" class="form-control" placeholder="Email" id="email" required/>
+                <label>Adres email</label>
+            </div>
+            <div class="form-floating mt-3">
+                <input name="password" class="form-control" type="password" placeholder="Password" id="password" required/>
+                <label>Hasło</label>
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary w-100">Zaloguj</button>
+        </form>
+        <br/>
+        <p>Nie masz konta? <a asp-action="Create" asp-controller="Users">Zarejestruj się tutaj!</a></p>
     </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Hasło</label>
-        <input type="password" name="password" class="form-control" id="password" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Zaloguj</button>
-</form>
-
+</div>
 @if (!ViewData.ModelState.IsValid)
 {
     <div class="text-danger mt-2">
-        Nieprawidłowy email lub hasło.
+        Nieprawidłowy adres email lub hasło.
     </div>
 }
-
-<hr />
-<p>Nie masz konta? <a asp-action="Create" asp-controller="Users">Zarejestruj się jako restauracja</a>.</p>
