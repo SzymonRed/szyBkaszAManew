@@ -25,6 +25,7 @@
             </div>
         </div>
     </div>
+    <div class="row">
     @if (ViewBag.UserRole == "Client")
     {
         <a class="btn btn-primary" href="@Url.Action("Index", "Restaurants")">Wyświetl Restauracje</a>
@@ -32,6 +33,7 @@
         <a class="btn btn-primary" href="@Url.Action("MyOrders", "Orders")">Moje Zamówienia</a>
 
     }
+    </div>
 </div>
 <style>
     .fixed-tile {

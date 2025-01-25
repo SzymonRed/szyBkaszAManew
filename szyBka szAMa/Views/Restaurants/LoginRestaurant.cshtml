@@ -17,7 +17,7 @@ ViewData["Title"] = "Logowanie restauracji";
         <button type="submit" class="btn btn-primary w-100">Zaloguj</button>
     </form>
     <br/>
-    <p>Nie masz konta? <a asp-action="RegisterRestaurant" asp-controller="Restaurants">Zarejestruj się tutaj!</a></p>
+    <p>Nie masz konta? <a asp-action="RegisterRestaurantAdministrator" asp-controller="Restaurants">Zarejestruj się tutaj!</a></p>
 </div>
 
 @if (ViewData["LoginError"] != null)

@@ -252,6 +252,7 @@ namespace szyBka_szAMa.Controllers
                 // Ustawienie sesji użytkownika
                 HttpContext.Session.SetInt32("LoggedInUserId", user.Id);
                 HttpContext.Session.SetString("LoggedInUserRole", user.Role.ToString());
+                HttpContext.Session.SetString("LoggedInUserName", user.UserName.ToString());
 
                 // Przekierowanie do strony głównej po pomyślnym logowaniu
                 return RedirectToAction("Index", "Home");
@@ -405,6 +406,17 @@ namespace szyBka_szAMa.Controllers
             }
 
             return View(model);
+        }
+        
+        public IActionResult Logout()
+        {
+            // Usunięcie sesji użytkownika
+            HttpContext.Session.Remove("LoggedInUserId");
+            HttpContext.Session.Remove("LoggedInUserRole");
+            HttpContext.Session.Remove("LoggedInUserName");
+
+            // Przekierowanie do strony logowania po wylogowaniu
+            return RedirectToAction("Login");
         }
     }
 }
