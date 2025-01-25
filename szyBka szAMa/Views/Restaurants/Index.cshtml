@@ -6,26 +6,30 @@
 
 <h2>Lista Restauracji</h2>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>Nazwa</th>
-        <th>Adres</th>
-        <th>Akcja</th>
-    </tr>
-    </thead>
-    <tbody>
+<div class="row">
     @foreach (var restaurant in Model)
     {
-        <tr>
-            <td>@restaurant.Name</td>
-            <td>@restaurant.Address.Street, @restaurant.Address.City</td>
-            <td>
-                <a class="btn btn-info" href="@Url.Action("Menu", "Restaurants", new { id = restaurant.Id })">
-                    Wyświetl Menu
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg border-0">
+                <a href="@Url.Action("Menu", "Restaurants", new { id = restaurant.Id })" class="card-link">
+                    <div class="card-body">
+                        <h5 class="card-title">@restaurant.Name</h5>
+                        <img src="path_to_image.png" alt="@restaurant.Name" class="card-img mb-3" />
+                        <p class="card-text">@restaurant.Address.Street, @restaurant.Address.City</p>
+                    </div>
                 </a>
-            </td>
-        </tr>
+            </div>
+        </div>
     }
-    </tbody>
-</table>
+</div>
+<style>
+    .card-link {
+        text-decoration: none; /* Usuwa podkreślenie */
+        color: inherit; /* Kolor tekstu odziedziczony po elemencie nadrzędnym */
+    }
+
+    .card-link:hover {
+        opacity: 0.8; /* Ustawienie efektu przyciemnienia po najechaniu */
+        text-decoration: none; /* Usuwa podkreślenie przy hover */
+    }
+</style>

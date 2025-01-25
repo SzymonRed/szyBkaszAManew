@@ -6,30 +6,35 @@
         <!-- Kafelek Restauracje -->
         <div class="col-md-6 mb-4">
             <div class="card shadow-lg border-0 fixed-tile">
-                <div class="card-body">
-                    <h2 class="card-title">Restauracje</h2>
-                    <p class="card-text">Odkryj najlepsze restauracje w swojej okolicy!</p>
-                    <a class="btn btn-primary btn-lg" href="@Url.Action("Index", "Restaurants")">Zobacz Restauracje</a>
-                </div>
+                <a href="@Url.Action("Index", "Restaurants")" class="card-link">
+                    <div class="card-body">
+                        <h2 class="card-title">Restauracje</h2>
+                        <img src="path_to_your_image.png" alt="Dania" class="card-img-top mb-3" />
+                        <p class="card-text">Szukaj restauracji w pobliżu!</p>
+                    </div>
+                </a>
             </div>
         </div>
+
 
         <!-- Kafelek Dania -->
         <div class="col-md-6 mb-4">
             <div class="card shadow-lg border-0 fixed-tile">
-                <div class="card-body">
-                    <h2 class="card-title">Dania</h2>
-                    <p class="card-text">Zamów swoje ulubione potrawy już teraz!</p>
-                    <a class="btn btn-primary btn-lg" href="@Url.Action("Index", "Dishes")">Zobacz Dania</a>
-                </div>
+                <a href="@Url.Action("Index", "Restaurants")" class="card-link">
+                    <div class="card-body">
+                        <h2 class="card-title">Dania</h2>
+                        <img src="path_to_your_image.png" alt="Dania" class="card-img-top mb-3" />
+                        <p class="card-text">Zamów swoje ulubione potrawy już teraz!</p>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
+    <div></div>
     @if (ViewBag.UserRole == "Client")
     {
-        <a class="btn btn-primary" href="@Url.Action("Index", "Restaurants")">Wyświetl Restauracje</a>
-        <a class="btn btn-primary" href="@Url.Action("Index", "Baskets")">Twój Koszyk</a>
-        <a class="btn btn-primary" href="@Url.Action("MyOrders", "Orders")">Moje Zamówienia</a>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Baskets")">Koszyk</a>
+        <a class="btn btn-primary" href="@Url.Action("MyOrders", "Orders")">Zamówienia</a>
 
     }
 </div>
