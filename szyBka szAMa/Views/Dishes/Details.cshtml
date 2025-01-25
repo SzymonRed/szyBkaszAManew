@@ -1,14 +1,21 @@
 ﻿@model szyBka_szAMa.Models.Dish
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-9">
-            <h1>Details for @Model.Name</h1>
+    <!-- Pierwszy wiersz: Obrazek po lewej stronie i szczegóły po prawej -->
+    <div class="row mb-4">
+        <!-- Obrazek dania po lewej stronie -->
+        <div class="col-md-6">
+            @if (!string.IsNullOrEmpty(Model.Photo))
+            {
+                <div class="mb-3">
+                    <img src="@Model.Photo" alt="@Model.Name" class="img-fluid" />
+                </div>
+            }
+        </div>
 
-            <div>
-                <strong>Description:</strong>
-                <p>@Model.Description</p>
-            </div>
+        <!-- Szczegóły dania po prawej stronie -->
+        <div class="col-md-6">
+            <h1>Details for @Model.Name</h1>
 
             <div>
                 <strong>Price:</strong>
@@ -20,27 +27,35 @@
                 <p>@Model.DishCategory</p>
             </div>
 
-            @if (!string.IsNullOrEmpty(Model.Photo))
-            {
-            <div>
-                <strong>Photo:</strong>
-                <img src="@Model.Photo" alt="@Model.Name" class="img-fluid" />
-            </div>
-            }
-
             <div>
                 <strong>Restaurant:</strong>
                 <p>@Model.Restaurant.Name</p>
             </div>
-
-        @if (ViewBag.Role == "RestaurantAdministrator")
-            {
-
-                <!-- Przycisk edycji -->
-                <a asp-action="EditDish" asp-controller="Dishes" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
-            }
-            <!-- Przycisk powrotu do menu restauracji -->
-            <a asp-action="Menu" asp-controller="Restaurants" asp-route-id="@Model.RestaurantId" class="btn btn-secondary">Back to Menu</a>
         </div>
     </div>
+
+    <!-- Drugi wiersz: Opis dania -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div>
+                <strong>Description:</strong>
+                <p>@Model.Description</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Przycisk edycji i powrotu do menu -->
+    @if (ViewBag.Role == "RestaurantAdministrator")
+    {
+        <!-- Przycisk edycji -->
+        <a asp-action="EditDish" asp-controller="Dishes" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    }
+
+    <!-- Przycisk powrotu do menu restauracji -->
+    <a asp-action="Menu" asp-controller="Restaurants" asp-route-id="@Model.RestaurantId" class="btn btn-secondary">Back to Menu</a>
 </div>
+<style>
+    .img-fluid {
+        margin-bottom: 20px;
+    }
+</style>
