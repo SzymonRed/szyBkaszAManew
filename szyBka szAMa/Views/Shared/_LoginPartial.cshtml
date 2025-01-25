@@ -15,8 +15,9 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id='@Context.Session.GetInt32("LoggedInUserId")'>Witaj, @Context.Session.GetString("LoggedInUserName")!</a>
         </li>
-        <a href="@Url.Action("Logout", "Users")">Wyloguj się</a>
-
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="@Url.Action("Logout", "Users")">Wyloguj się</a>
+        </li>
     }
     else
     {

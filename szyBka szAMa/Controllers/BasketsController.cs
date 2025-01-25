@@ -33,7 +33,7 @@ namespace szyBka_szAMa.Controllers
 
             if (basket == null)
             {
-                return View((IEnumerable<IGrouping<int, Dish>>)new List<Dish>()); // Pusty koszyk
+                return View(new List<Dish>() as IEnumerable<IGrouping<int, Dish>>); // Pusty koszyk
             }
 
             // Zgrupowanie dań według Restauracji
