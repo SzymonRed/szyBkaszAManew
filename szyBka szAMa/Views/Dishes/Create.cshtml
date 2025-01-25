@@ -4,42 +4,97 @@ ViewBag.Title = "Add Dish";
 }
 
 <h1>Add a New Dish</h1>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="container" style="max-width: 1000px;">
+        <form asp-action="Create" asp-controller="Dishes" method="post" enctype="multipart/form-data">
+            <div class="container mt-5">
+                <v class="row border rounded p-4 shadow-sm">
+                    <h1>Dodawanie nowego dania do menu</h1>
+                    <div class="row mt-4">
+                        <h3>Informacje podstawowe:</h3>
+                        <hr />
 
-<form asp-action="Create" asp-controller="Dishes" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="Name">Dish Name</label>
-        <input type="text" class="form-control" id="Name" name="Name" required />
+                        <!-- Lewa strona: Podgląd obrazu i input -->
+                        <div class="col-md-6 text-center">
+                            <div class="image-container" style="width: 200px; height: 200px; margin: 0 auto; position: relative; text-align:center;">
+                                <img id="imagePreview" src="~/images/photo-gallery.png" alt="Image Preview" class="img-fluid" style="object-fit: contain; width: 100%; height: 100%;" />
+                            </div>
+                            <div class="mt-3 text-center">
+                                <input type="file" class="form-control w-75" id="Photo" name="Photo" placeholder="Wybierz obraz produktu" onchange="previewImage(event)" />
+                            </div>
+                        </div>
+
+                        <!-- Prawa strona: Pola formularza -->
+                        <div class="col-md-6">
+                            <!-- Nazwa dania -->
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="Name" name="Name" placeholder="Dish Name" required />
+                                <label for="Name">Dish Name</label>
+                            </div>
+
+                            <!-- Cena -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">PLN</span>
+                                <input type="number" step="0.01" class="form-control" aria-label="Cena" placeholder="Wpisz cenę" id="Price" name="Price" required />
+                            </div>
+
+                            <!-- Kategoria -->
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="DishCategory">Kategoria</label>
+                                <select class="form-select" id="DishCategory" name="DishCategory">
+                                    <option value="SideDish" selected>Przystawka</option>
+                                    <option value="MainDish">Danie główne</option>
+                                    <option value="SoftDrink">Napój bezalkoholowy</option>
+                                    <option value="Drink">Napój</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <!-- Opis -->
+                    <div class="row mt-4">
+                        <h3>Opis produktu:</h3>
+                        <hr />
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <textarea class="form-control" name="Description" placeholder="Opis" id="Description" style="height:100px; width: 100%;" required></textarea>
+                                <label for="Description">Opis</label>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="RestaurantId" value="@ViewBag.RestaurantId" />
+              
+                    <button type="submit" class="btn btn-primary w-100 mt-4">Dodaj danie</button>
+                </v>
+            </div>
+        </form>
     </div>
+</div>
 
-    <div class="form-group">
-        <label for="Description">Description</label>
-        <textarea class="form-control" id="Description" name="Description" required></textarea>
-    </div>
+<a href="@Url.Action("Menu", "Restaurants", new { id = ViewBag.RestaurantId })" class="btn btn-link mt-2">Wróć do listy</a>
 
-    <div class="form-group">
-        <label for="Price">Price</label>
-        <input type="number" step="0.01" class="form-control" id="Price" name="Price" required />
-    </div>
+<style>
+    .image-container {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+        background-color: #f8f9fa;
+    }
+</style>
 
-    <div class="form-group">
-        <label for="DishCategory">Category</label>
-        <select class="form-control" id="DishCategory" name="DishCategory">
-            <option value="SideDish">Side Dish</option>
-            <option value="MainDish">Main Dish</option>
-            <option value="SoftDrink">Soft Drink</option>
-            <option value="Drink">Drink</option>
-        </select>
-    </div>
+@section Scripts {
+    <script>
+        document.getElementById("Photo").addEventListener("change", function (event) {
+            var reader = new FileReader();
 
-    <div class="form-group">
-        <label for="Photo">Upload Photo</label>
-        <input type="file" class="form-control" id="Photo" name="Photo" />
-    </div>
+            reader.onload = function (e) {
+                var image = document.getElementById("imagePreview");
+                image.src = e.target.result;
+            };
 
-    <!-- Ukryte pole do przesyłania RestaurantId -->
-    <input type="hidden" name="RestaurantId" value="@ViewBag.RestaurantId" />
-
-    <button type="submit" class="btn btn-primary">Add Dish</button>
-</form>
-
-<a href="@Url.Action("Menu", "Restaurants", new { id = ViewBag.RestaurantId })" class="btn btn-secondary mt-2">Back to Menu</a>
+            if (this.files && this.files[0]) {
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    </script>
+}

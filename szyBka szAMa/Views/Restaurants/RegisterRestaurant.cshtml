@@ -5,42 +5,55 @@ ViewData["Title"] = "Rejestracja Restauracji";
 }
 
 <h2>Rejestracja Restauracji</h2>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="container" style="max-width: 600px;">
+        <form asp-action="RegisterRestaurant" method="post">
+            <div class="form-floating mt-3">
+                <label>Nazwa restauracji</label>
+                <input type="text" class="form-control" id="Name" name="Name" required />
+            </div>
 
-<form asp-action="RegisterRestaurant" method="post">
-    <div class="form-group">
-        <label for="Name">Nazwa restauracji</label>
-        <input type="text" class="form-control" id="Name" name="Name" required />
-    </div>
+            <h4 class="mt-4">Adres restauracji</h4>
+            <div class="row">
+                <div class="form-floating col-md-6">
+                    <label>Ulica</label>
+                    <input type="text" class="form-control" id="Street" name="Address.Street" required />
+                </div>
+                <div class="form-floating col-md-3">
+                    <label>Numer budynku</label>
+                    <input type="text" class="form-control" id="Building" name="Address.Building" required />
+                </div>
+                <div class="form-floating col-md-3">
+                    <label>Numer mieszkania</label>
+                    <input type="text" class="form-control" id="Apartment" name="Address.Apartment" />
+                </div>
+            </div>
 
-    <h3>Adres Restauracji</h3>
-    <div class="form-group">
-        <label for="City">Miasto</label>
-        <input type="text" class="form-control" id="City" name="Address.City" required />
-    </div>
-    <div class="form-group">
-        <label for="Street">Ulica</label>
-        <input type="text" class="form-control" id="Street" name="Address.Street" required />
-    </div>
-    <div class="form-group">
-        <label for="ZipCode">Kod pocztowy</label>
-        <input type="text" class="form-control" id="ZipCode" name="Address.ZipCode" required />
-    </div>
-    <div class="form-group">
-        <label for="Building">Numer budynku</label>
-        <input type="text" class="form-control" id="Building" name="Address.Building" required />
-    </div>
-    <div class="form-group">
-        <label for="Apartment">Numer mieszkania</label>
-        <input type="text" class="form-control" id="Apartment" name="Address.Apartment" />
-    </div>
-    <div class="form-group">
-        <label for="Apartment">Email restauracji</label>
-        <input type="text" class="form-control" id="Email" name="Address.Email" />
-    </div>
-    <div class="form-group">
-        <label for="Phone">Telefon</label>
-        <input type="text" class="form-control" id="Phone" name="Address.Phone" />
-    </div>
+            <div class="row mt-3">
+                <div class="form-floating col-md-6">
+                    <label>Kod pocztowy</label>
+                    <input type="text" class="form-control" id="ZipCode" name="Address.ZipCode" required />
+                </div>
+                <div class="form-floating col-md-6">
+                    <label>Miasto</label>
+                    <input type="text" class="form-control" id="City" name="Address.City" required />
+                </div>
+            </div>
 
-    <button type="submit" class="btn btn-primary">Zarejestruj Restaurację</button>
-</form>
+            <div class="form-floating mt-3">
+                <label>Adres email</label>
+                <input type="text" class="form-control" id="Email" name="Address.Email" />
+            </div>
+
+            <div class="form-floating mt-3">
+                <label>Numer telefonu</label>
+                <input type="text" class="form-control" id="Phone" name="Address.Phone" />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-4 w-100">Zarejestruj restauracje</button>
+        </form>
+        <div class="mt-3 text-center">
+            <p>Masz już konto? <a href="@Url.Action("LoginRestaurant", "Restaurants")" class="btn btn-link">Zaloguj się tutaj!</a></p>
+        </div>
+    </div>
+</div>
